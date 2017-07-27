@@ -15,7 +15,6 @@ class AllowedUsers extends Model
      */
     protected $fillable = [
         'firstname',
-        'lastname',
         'babe_id', 
         'uuid', 
     ];
