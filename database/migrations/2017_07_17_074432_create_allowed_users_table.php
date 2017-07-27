@@ -16,7 +16,7 @@ class CreateAllowedUsersTable extends Migration
         Schema::create('allowed_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('firstname');
-            $table->string('lastname');
+            $table->string('uuid');
             $table->integer('babe_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();

@@ -17,8 +17,8 @@ class CreateBabesTable extends Migration
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('uuid');
             // remember to hash the passwords in the Babe Model
-            $talbe->string('uuid');  // generate a unique user id for the user
             $table->timestamps();
             $table->softDeletes();
         });
