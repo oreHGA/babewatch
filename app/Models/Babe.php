@@ -17,8 +17,6 @@ class Babe extends Model
      */
     protected $fillable = [
         'email',
-        'firstname', 
-        'lastname', 
         'password',
         'uuid',
     ];

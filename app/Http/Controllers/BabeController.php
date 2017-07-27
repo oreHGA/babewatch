@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Babe;
+use App\Models\Babe;
 use Illuminate\Http\Request;
 
 class BabeController extends Controller
@@ -36,6 +36,13 @@ class BabeController extends Controller
     public function store(Request $request)
     {
         //
+        $babe_model = new Babe([
+            'email' => $request->email,
+            'password' => $request->password,
+            'uuid' => '1234',
+        ]);
+        // TODO: Generae unique ids for every user
+        // TODO: find out what hashing algo to use for the user pass
     }
 
     /**

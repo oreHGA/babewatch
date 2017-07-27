@@ -16,8 +16,6 @@ class CreateBabesTable extends Migration
         Schema::create('babes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email')->unique();
-            $table->string('firstname');
-            $table->string('lastname');
             $table->string('password');
             // remember to hash the passwords in the Babe Model
             $talbe->string('uuid');  // generate a unique user id for the user

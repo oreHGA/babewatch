@@ -10,8 +10,8 @@ Sign in
             <p>Welcome, please sign in below or <a href="{{ rtrim(config('app.url'), '/') }}/babe/create"> Sign up </a> to continue</p>
         </div>
 
-        <div method="POST" action="" class="form col-sm-6">
-            <div> --->{{ rtrim(config('app.url'), '/') }}</div>
+        <form method="POST" action="" class="form col-sm-6">
+        {{-- details should be submitted to an authentication controller   --}}
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" name="email" class="form-control" placeholder="Enter Email Here">
@@ -25,6 +25,6 @@ Sign in
             <div class="form-group">
                 <input type="submit" class="btn btn-primary">
             </div>
-        </div>
+        </form>
     </div>
 @endsection
