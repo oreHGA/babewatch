@@ -38,11 +38,34 @@ class BabeController extends Controller
         //
         $babe_model = new Babe([
             'email' => $request->email,
-            'password' => $request->password,
-            'uuid' => '1234',
+            'password' => password_hash( $request->password , PASSWORD_BCRYPT),
+            'uuid' => uniqid('user_'),  
         ]);
-        // TODO: Generae unique ids for every user
-        // TODO: find out what hashing algo to use for the user pass
+        $babe_model->save();
+        
+        session([
+          'user_email' => $babe_model->email,
+          'user_id' => $babe_model->id,
+          'gallery_name' => $babe_model->uuid 
+        ]);
+
+        // TODO: doNT FORGET TO Check if user already exists
+        return view('dashboard');
+    }
+
+    // to authenticate users
+    public function authenticate(Request $request){
+        $babe_model = Babe::where('email', $request->email);
+        $hashed_pass = password_hash($request->password, PASSWORD_BCRPYT);
+        if($babe_model->password != $hased_pass)
+            return view('signin');    // TODO: Also add a status to let them know that the password was incorrect
+        
+        session([
+          'user_email' => $babe_model->email,
+          'user_id' => $babe_model->id,
+        ]);
+        // save user in session
+        return view('dashboard');
     }
 
     /**
