@@ -20,6 +20,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="fa fa-user-o" aria-hidden="true"></span> {{session('user_name')}}</a></li>
+                {{-- TODO: Add dopdown for account management   --}}
                 <li><a href="{{rtrim(config('app.url'), '/') . '/signout'}}" >
                         <span class="fa fa-sign-out" ></span>Sign Out
                     </a>

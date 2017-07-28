@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AllowedUsers;
 use App\Models\APIModel;
+use App\Models\StorageModel;
 
 class AllowedUsersController extends Controller
 {
     protected $api_model;
+    protected $storage_model;
 
     public function __construct(){
         $this->api_model = new APIModel();
+        $this->storage_model = new StorageModel();
     }
     
     public function addFriend(Request $r){
@@ -21,12 +24,16 @@ class AllowedUsersController extends Controller
             'uuid' => uniqid('friend_' . session('user_id') . '_'),
         ]);
         $friend->save();
-        // TODO: Save image locally and then pass the full url as a parameter to the function
         // Right now the images aren't being saved locally but rather just sennt straight to kairos
-        $image = $r->file('picture');
-        $status = $this->api_model->addImageToGallery($image, $friend->firstname , session('gallery_name'));
+        $image = $r->picture;
+        $status = false;
+        $upload_link = $this->storage_model->upload_object($friend->uuid, $image);
+        if($upload_link){
+            $status = $this->api_model->addImageToGallery($upload_link, $friend->firstname , session('gallery_name'));
+        }
         if($status)
-            dd($status);
-            return back()->with('status', $friend->firstname . ' has been added');
+            return back()->with('status', $friend->firstname . ' has been added.' . 'They can now touch your babe');
+        
+        return back()->with('error', 'Unfortunately, something went wrong. Friend could not be added');
     }
 }

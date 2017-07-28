@@ -10,6 +10,11 @@ Add Friends
         {{ session('status') }}
         </div>
     @endif
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissable fade in">
+        {{ session('error') }}
+        </div>
+    @endif
     <div class="container">
         <div class="row">
              <p>Hey, {{session('user_name')}}. Add your friends below </p> 
