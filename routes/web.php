@@ -20,6 +20,7 @@ Route::group(['middleware' => 'isloggedin'], function () {
     Route::get('addfriend', function(){ return view('addauthorizedcarriers');});
     Route::post('addfriend', 'AllowedUsersController@addFriend');
     Route::get('dashboard', function(){ return view('dashboard');})->name('dashboard');
-    Route::get('signout', 'AuthenticationController@signout');
+    Route::post('verifyfriend', 'AllowedUsersController@verify');
     Route::get('contact', function(){return view('contact');});
+    Route::get('signout', 'AuthenticationController@signout');
 });
