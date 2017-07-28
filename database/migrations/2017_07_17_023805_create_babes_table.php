@@ -15,10 +15,10 @@ class CreateBabesTable extends Migration
     {
         Schema::create('babes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('uuid');
-            // remember to hash the passwords in the Babe Model
             $table->timestamps();
             $table->softDeletes();
         });
