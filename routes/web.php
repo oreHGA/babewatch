@@ -11,15 +11,15 @@
 |
 */
 
-Route::get('/', function () {return view('welcome');});
-
+// landing route for the mandem
+Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::resource('/babe', 'BabeController');
-
-Route::get('addfriend', function(){
-    return view('addauthorizedcarriers');
-});
-Route::post('addfriend', 'AllowedUsersController@addFriend');
-
 Route::post('authenticate', 'AuthenticationController@authenticate');
-// TODO: Create view for a user to add his/her friends
 // TODO: Open camera stream to validate users once they hit a button / have a streea open on another dedicated device
+Route::group(['middleware' => 'isloggedin'], function () {
+    Route::get('addfriend', function(){ return view('addauthorizedcarriers');});
+    Route::post('addfriend', 'AllowedUsersController@addFriend');
+    Route::get('dashboard', function(){ return view('dashboard');})->name('dashboard');
+    Route::get('signout', 'AuthenticationController@signout');
+    Route::get('contact', function(){return view('contact');});
+});
