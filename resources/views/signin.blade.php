@@ -10,26 +10,30 @@ Sign in
         {{ session('status') }}
         </div>
     @endif
-    <div class="container">
-        <div class="row">
-            <p>Welcome, please sign in below or <a href="{{ rtrim(config('app.url'), '/') }}/babe/create"> Sign up </a> to continue</p>
+
+    <div class="login-page">
+        <div class="form">
+            <form method="POST" action="{{ rtrim(config('app.url'), '/') }}/babe" class="register-form">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <p>👶🏾</p>
+                <input type="text" name="username" placeholder="name"/>
+                <input type="text" id="first_email" name="email" placeholder="email address"/>
+                <input type="text" id="second_email" name="verify_email" placeholder="re-type email address"/>
+                <p id="email_error" style="color: red; display:none;">Email addresses do not match</p>
+                <input type="password" name="password" id="first_pass" placeholder="password"/>
+                <input type="password"  name="verify_password" id="second_pass" placeholder="re-type password"/>
+                <p id="pass_error" style="color: red; display:none;">Passwords do not match</p>
+                <button type="submit">sign up</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+            <form method="POST" action="{{ rtrim(config('app.url'), '/') . '/authenticate'}}" class="login-form">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <p>👶🏾</p>
+                <input type="text" name="email" placeholder="email"/>
+                <input type="password" name="password" placeholder="password"/>
+                <button type="submit">login</button>
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
         </div>
-
-        <form method="POST" action="{{ rtrim(config('app.url'), '/') . '/authenticate'}}" class="form col-sm-6">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" name="email" class="form-control" placeholder="Enter Email Here">
-            </div>
-
-            <div class="form-group">
-                <label for="user_pass">Password</label>
-                <input class="form-control" type="password" placeholder="Enter password">
-            </div>
-
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary">
-            </div>
-        </form>
     </div>
 @endsection

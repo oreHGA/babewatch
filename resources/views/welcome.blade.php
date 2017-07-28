@@ -85,7 +85,7 @@
                     We watch your baby for you while you are busy.
                 </div> 
                 <div class="links">
-                    <a href="/babe/create">Sign Up</a>
+                    <a href="/babe">Sign Up</a>
                     <a href="/babe">Sign In</a>
                 </div>
 
