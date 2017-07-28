@@ -36,6 +36,7 @@ class BabeController extends Controller
     {
         //
         $babe_model = new Babe([
+            'username' => $request->username,
             'email' => $request->email,
             'password' => password_hash( $request->password , CRYPT_BLOWFISH),
             'uuid' => uniqid('user_'),  
@@ -43,6 +44,7 @@ class BabeController extends Controller
         $babe_model->save();
         
         session([
+          'user_name' => $babe_model->username,  
           'user_email' => $babe_model->email,
           'user_id' => $babe_model->id,
           'gallery_name' => $babe_model->uuid 
