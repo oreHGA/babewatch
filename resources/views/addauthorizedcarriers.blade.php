@@ -1,15 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.registered')
 
 @section('title')
 Add Friends
 @endsection
 
 @section('content')
+    @if(session('status'))
+        <div class="alert alert-success alert-dismissable fade in">
+        {{ session('status') }}
+        </div>
+    @endif
     <div class="container">
         <div class="row">
-             <p>Hey, {{session('user_email')}}. Add your friends below </p> 
+             <p>Hey, {{session('user_name')}}. Add your friends below </p> 
         </div>
         <form action="{{ rtrim(config('app.url'), '/') }}/addfriend" method="POST" class="form" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
                 <label for="friend_name">Friend's Name</label>
                 <input type="text" id="friend_name" name="friend_name" placeholder="Enter Friend's Name" class="form-control">
