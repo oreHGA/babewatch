@@ -47,7 +47,6 @@ class APIModel
         $response = curl_exec($ch);
         curl_close($ch);
 
-        dd($response);
-        // ifreturn 
+        return $response;
     }
 }

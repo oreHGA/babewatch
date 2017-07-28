@@ -25,6 +25,7 @@ class AllowedUsersController extends Controller
         // Right now the images aren't being saved locally but rather just sennt straight to kairos
         $image = $r->file('picture');
         $status = $this->api_model->addImageToGallery($image, $friend->firstname , session('gallery_name'));
-        return back()->with('status', $friend->firstname . 'has been added');
+        if($status)
+            return back()->with('status', $friend->firstname . 'has been added');
     }
 }
