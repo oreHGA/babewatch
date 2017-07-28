@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Babe;
 use Illuminate\Http\Request;
 
@@ -38,7 +37,7 @@ class BabeController extends Controller
         //
         $babe_model = new Babe([
             'email' => $request->email,
-            'password' => password_hash( $request->password , PASSWORD_BCRYPT),
+            'password' => password_hash( $request->password , CRYPT_BLOWFISH),
             'uuid' => uniqid('user_'),  
         ]);
         $babe_model->save();
@@ -50,21 +49,6 @@ class BabeController extends Controller
         ]);
 
         // TODO: doNT FORGET TO Check if user already exists
-        return view('dashboard');
-    }
-
-    // to authenticate users
-    public function authenticate(Request $request){
-        $babe_model = Babe::where('email', $request->email);
-        $hashed_pass = password_hash($request->password, PASSWORD_BCRPYT);
-        if($babe_model->password != $hased_pass)
-            return view('signin');    // TODO: Also add a status to let them know that the password was incorrect
-        
-        session([
-          'user_email' => $babe_model->email,
-          'user_id' => $babe_model->id,
-        ]);
-        // save user in session
         return view('dashboard');
     }
 
