@@ -26,6 +26,7 @@ class AllowedUsersController extends Controller
         $image = $r->file('picture');
         $status = $this->api_model->addImageToGallery($image, $friend->firstname , session('gallery_name'));
         if($status)
-            return back()->with('status', $friend->firstname . 'has been added');
+            dd($status);
+            return back()->with('status', $friend->firstname . ' has been added');
     }
 }
