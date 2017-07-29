@@ -21,7 +21,7 @@ class AuthenticationController extends Controller
           'user_name' => $babe_model->username,
           'user_email' => $babe_model->email,
           'user_id' => $babe_model->id,
-          'gallery_name' => $babe_model->username . 'gallery',
+          'gallery_name' => $babe_model->username . 'KAIROgallery',
         ]);
         return redirect()->route('dashboard');
     }
