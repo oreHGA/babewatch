@@ -19,7 +19,7 @@ class AuthenticationController extends Controller
           'user_name' => $babe_model->username,
           'user_email' => $babe_model->email,
           'user_id' => $babe_model->id,
-          'gallery_name' => $babe_model->uuid 
+          'gallery_name' => $babe_model->username . 'gallery',
         ]);
         return redirect()->route('dashboard');
     }
