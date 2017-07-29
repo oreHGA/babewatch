@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\AllowedUsers;
 use App\Models\APIModel;
 use App\Models\StorageModel;
+use App\Models\EmailModel;
 
 class AllowedUsersController extends Controller
 {
     protected $api_model;
     protected $storage_model;
+    protected $email_sender;
 
     public function __construct(){
         $this->api_model = new APIModel();
         $this->storage_model = new StorageModel();
+        $this->email_sender = new EmailModel();
     }
     
     public function addFriend(Request $r){
@@ -52,6 +55,24 @@ class AllowedUsersController extends Controller
         }
         $response = $this->api_model->verifyUserFromGallery($upload_link, session('gallery_name'), 'suspect');
 
-        return json_encode($response);
+        $result;
+        if($response->Errors){
+            $result['status'] = 'Fail';
+            $result['message'] = $response->Errors[0]->Message;
+
+            // now send an email the user that someone evil tried to touch their babe
+
+        }else{
+            if($response->images[0]->transaction->confidence > 0.75 ){
+                // this means the user is good to go for now
+                // send an email to the user  that someones in
+
+
+            }
+            $result['status'] = 'Pass';
+        }                    
+        // send an email before you return the json result to the user 
+        $this->email_sender->statusUpdate( session('user_email'), $result['status'], $response->uploaded_image_url );
+        return json_encode($result); 
     }
 }

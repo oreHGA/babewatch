@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Babe;
 use Illuminate\Http\Request;
+use App\Models\EmailModel;
 
 class BabeController extends Controller
 {
@@ -49,6 +50,9 @@ class BabeController extends Controller
           'user_id' => $babe_model->id,
           'gallery_name' => $babe_model->username . 'gallery',
         ]);
+
+        $email_sender = new EmailModel();
+        $email_sender->welcomeMail($babe_model->email);
 
         // TODO: doNT FORGET TO Check if user already exists
         return view('dashboard');
