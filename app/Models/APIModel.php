@@ -51,7 +51,7 @@ class APIModel
     }
 
     public function verifyUserFromGallery($image_url, $gallery_name, $subject_id){
-        $url = $this->kairos_url . '/enroll';
+        $url = $this->kairos_url . '/verify';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
