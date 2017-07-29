@@ -22,5 +22,6 @@ Route::group(['middleware' => 'isloggedin'], function () {
     Route::get('dashboard', function(){ return view('dashboard');})->name('dashboard');
     Route::post('verifyfriend', 'AllowedUsersController@verify');
     Route::get('contact', function(){return view('contact');});
+    Route::get('success', function(){return view('success');});
     Route::get('signout', 'AuthenticationController@signout');
 });

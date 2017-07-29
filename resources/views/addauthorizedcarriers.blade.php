@@ -19,7 +19,7 @@ Add Friends
         <div class="row">
              <p>Hey, {{session('user_name')}}. Add your friends below </p> 
         </div>
-        <form action="{{ rtrim(config('app.url'), '/') }}/addfriend" method="POST" class="form" enctype="multipart/form-data">
+        <form class="col-sm-4" action="{{ rtrim(config('app.url'), '/') }}/addfriend" method="POST" class="form" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
                 <label for="friend_name">Friend's Name</label>
@@ -31,8 +31,9 @@ Add Friends
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Add Friend" class="btn btn-primary">
-            </div
+                <input type="submit" id="addfriend" value="Add Friend" class="btn btn-primary"  style="background-color:#030303;" >
+                <span class="fa fa-spin fa-spinner" id="verify_spinner" style="display:none;" aria-hidden="true"></span>
+            </div>
         </form>
     </div>
 @endsection

@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
     <script>
         var CSRF_TOKEN = "{{ csrf_token() }}";
+        var APP_URL = "{{ rtrim(config('app.url') , '/') }}";
     </script>
 </head>
 <body>

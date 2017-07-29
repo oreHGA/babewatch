@@ -11,9 +11,11 @@ class AuthenticationController extends Controller
     public function authenticate(Request $request){
         $babe_model = Babe::where('email', $request->email)->first();
 
-        if(!$babe_model || !password_verify($request->password, $babe_model->password))
-            return back()->with('status', 'Sorry email and password don\'t match');    
-        
+        if(!$babe_model)
+            return back()->with('status', 'Looks like you don\'t have an account with us');    
+        if(!password_verify($request->password, $babe_model->password))
+            return back()->with('status', 'Sorry email and password don\'t match');   
+
         // save user in session
         session([
           'user_name' => $babe_model->username,

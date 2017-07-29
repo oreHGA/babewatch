@@ -35,7 +35,7 @@ class AllowedUsersController extends Controller
             $response = $this->api_model->addImageToGallery($upload_link, $friend->firstname , session('gallery_name'));
         }
         
-        if(!$response->Errors)
+        if(!isset($response->Errors[0]->Message))
             return back()->with('status', $friend->firstname . ' has been added.' . 'They can now touch your babe');
         
         // dd($response->Errors[0]->Message);
@@ -51,28 +51,28 @@ class AllowedUsersController extends Controller
         file_put_contents($filepath, base64_decode($uri));
         $upload_link = $this->storage_model->upload_object('suspect', $filepath);
         if($upload_link){
-            $response = $this->api_model->addImageToGallery($upload_link, $friend->firstname , session('gallery_name'));
+            $response = $this->api_model->verifyUserFromGallery($upload_link, session('gallery_name'), 'suspect');
         }
-        $response = $this->api_model->verifyUserFromGallery($upload_link, session('gallery_name'), 'suspect');
 
-        $result;
-        if($response->Errors){
+        $result = [];
+        
+        if(isset($response->Errors[0]->Message)){
             $result['status'] = 'Fail';
             $result['message'] = $response->Errors[0]->Message;
-
-            // now send an email the user that someone evil tried to touch their babe
-
         }else{
-            if($response->images[0]->transaction->confidence > 0.75 ){
+            if($response->images[0]->transaction->confidence > 0.6 ){
                 // this means the user is good to go for now
                 // send an email to the user  that someones in
-
-
+                $result['status'] = 'Pass';
+                $result['message'] = 'Eyy! You just passed verification. You may see the babe';
             }
-            $result['status'] = 'Pass';
+            else{
+                $result['status'] = 'Fail';
+                $result['message'] = 'Sorry looks like you don\'t have access to the babe';
+            }
         }                    
         // send an email before you return the json result to the user 
-        $this->email_sender->statusUpdate( session('user_email'), $result['status'], $response->uploaded_image_url );
+        $this->email_sender->statusUpdate( session('user_email'), $result['status'], $upload_link );
         return json_encode($result); 
     }
 }

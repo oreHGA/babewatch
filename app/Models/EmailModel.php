@@ -33,8 +33,8 @@ class EmailModel
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-        $headers .= 'From: <support@babewatch.ng>' . "\r\n";
-        $headers .= 'Cc: ore@ogtech.ng' . "\r\n";
+        $headers .= 'From: <oreogundipe@gmail.com>' . "\r\n";
+        // $headers .= 'Cc: ore@ogtech.ng' . "\r\n";
 
         mail($to,$subject,$msg,$headers);
 
@@ -46,8 +46,8 @@ class EmailModel
         $to = $user_email;
         $subject = "Status Update";
 
-        $headers .= 'From: <support@babewatch.ng>' . "\r\n";
-        $headers .= 'Cc: ore@ogtech.ng' . "\r\n";
+        $headers = 'From: <oreogundipe@gmail.com>' . "\r\n";
+        // $headers .= 'Cc: ore@ogtech.ng' . "\r\n";
 
         mail($to,$subject,$msg,$headers);
     }
