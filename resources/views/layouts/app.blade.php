@@ -5,6 +5,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/babewatch.css') }}" rel="stylesheet">
     {{--  Include the necessary bootstrap and jquery here   --}}
+      <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 </head>
 <body>
     @yield('content')

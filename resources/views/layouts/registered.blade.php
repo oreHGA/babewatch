@@ -5,6 +5,10 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     {{--  Include the necessary bootstrap and jquery here   --}}
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+    <script>
+        var CSRF_TOKEN = "{{ csrf_token() }}";
+    </script>
 </head>
 <body>
    
