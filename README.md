@@ -1,4 +1,6 @@
-# BabeWatch 
+<p align=“center”><a href=“LICENSE”><img alt=“GitHub license” src="https://img.shields.io/github/license/laravelnigeria/website.svg"></a></p>
+
+# 👶🏾 BabeWatch 
 
 BabeWatch is a [Laravel](https://laravel.com/) application that uses Machine Learning algorithms to protect a baby. This is done by ensuring that only authorized people are allowed to move the baby from its location.
 
@@ -54,6 +56,9 @@ Now you need to edit your environment variables in your `.env` file
 The following would need to be changed :
 Note : `$database`, `$username`, `$password` refer to the values you set when you were setting up your databasea earlier
 ``` 
+DB_CONNECTION='database connection eg mysql'
+DB_HOST='database host eg 127.0.0.1'
+DB_PORT='3306'
 DB_DATABASE=$database
 DB_USERNAME=$username
 DB_PASSWORD=$password
