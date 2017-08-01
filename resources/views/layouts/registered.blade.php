@@ -20,7 +20,7 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="{{ rtrim(config('app.url'), '/') }}/dashboard">Home</a></li>
-                <li><a href="{{rtrim(config('app.url'), '/') . '/addfriend'}}" >Add a Friend</a></li>
+                <li><a href="{{rtrim(config('app.url'), '/') . '/friends'}}" >Add/Remove Friends</a></li>
                 <li><a href="{{rtrim(config('app.url'), '/') . '/contact'}}" >Contact Us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

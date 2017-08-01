@@ -13,11 +13,17 @@ class AllowedUsersController extends Controller
     protected $api_model;
     protected $storage_model;
     protected $email_sender;
+    protected $friends_model;
 
     public function __construct(){
         $this->api_model = new APIModel();
         $this->storage_model = new StorageModel();
         $this->email_sender = new EmailModel();
+        $this->friends_model = new AllowedUsers();
+    }
+    public function friendsList(Request $r){
+        $friends = AllowedUsers::where('babe_id', session('user_id'))->get();
+        return view('addauthorizedcarriers', ['friends' => $friends]);
     }
     
     public function addFriend(Request $r){

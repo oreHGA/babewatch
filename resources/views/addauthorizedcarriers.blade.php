@@ -17,7 +17,7 @@ Add Friends
     @endif
     <div class="container">
         <div class="row">
-             <p>Hey, {{session('user_name')}}. Add your friends below </p> 
+             <h1>Hey, {{session('user_name')}}. Manage your authorized friends below </h1> 
         </div>
         <form class="col-sm-4" action="{{ rtrim(config('app.url'), '/') }}/addfriend" method="POST" class="form" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -35,5 +35,19 @@ Add Friends
                 <span class="fa fa-spin fa-spinner" id="verify_spinner" style="display:none;" aria-hidden="true"></span>
             </div>
         </form>
+
+        <div class="col-sm-4">
+
+            {{-- Get all the friends and feed theme to the blade template, then loop through them   --}}
+            @if($friends)
+                <p>Here's a list of people authorized to see your babe</p>
+                @foreach($friends as $friend)
+                    <p> {{$friend->firstname }}</p>
+                @endforeach
+            @else
+                <p>Looks like you haven't added any friends yet</p>
+            @endif
+        </div>
+        <form action="" class="col-sm-4 form"></form>
     </div>
 @endsection

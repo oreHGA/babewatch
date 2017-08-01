@@ -17,7 +17,7 @@ Route::resource('/babe', 'BabeController');
 Route::post('authenticate', 'AuthenticationController@authenticate');
 // TODO: Open camera stream to validate users once they hit a button / have a streea open on another dedicated device
 Route::group(['middleware' => 'isloggedin'], function () {
-    Route::get('addfriend', function(){ return view('addauthorizedcarriers');});
+    Route::get('friends', 'AllowedUsersController@friendsList');
     Route::post('addfriend', 'AllowedUsersController@addFriend');
     Route::get('dashboard', function(){ return view('dashboard');})->name('dashboard');
     Route::post('verifyfriend', 'AllowedUsersController@verify');
